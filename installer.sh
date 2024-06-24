@@ -67,6 +67,11 @@ configure_environment() {
   print_message "Configuring environment variables..."
 
   read -p "Enter API URL: " api_url
+  while [[ ! $api_url =~ ^https?:// ]]; do
+    print_message "Invalid URL format. Please enter a valid URL starting with http:// or https://"
+    read -p "Enter API URL: " api_url
+  done
+
   read -p "Enter analytics key: " analytics_key
 
   echo "NEXT_PUBLIC_API_URL=$api_url" > .env.local
